@@ -1,0 +1,31 @@
+import numpy as np
+
+def gradient_descent(X, y, learning_rate, num_iterations):
+    num_examples, num_features = X.shape
+    theta = np.zeros(num_features)  # Initialize theta with zeros
+
+    for _ in range(num_iterations):
+        # Calculate predictions
+        predictions = np.dot(X, theta)
+
+        # Calculate the error
+        error = predictions - y
+
+        # Calculate the gradient
+        gradient = np.dot(X.T, error) / num_examples
+
+        # Update theta
+        theta -= learning_rate * gradient
+
+    return theta
+
+# Example usage
+# Assume we have a dataset X and corresponding labels y
+X = np.array([[1, 2], [3, 4], [5, 6]])
+y = np.array([3, 6, 9])
+
+learning_rate = 0.01
+num_iterations = 1000
+
+theta = gradient_descent(X, y, learning_rate, num_iterations)
+print("Theta:", theta)
